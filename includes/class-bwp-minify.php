@@ -2694,6 +2694,12 @@ class BWP_MINIFY extends BWP_FRAMEWORK_IMPROVED
 		if (empty($string))
 			return '';
 
+		/* Remove current wordpress domain from url to minify */
+		$domain = parse_url(get_site_url())['host'];                  
+        if(explode("/",$string)[0] == $domain) {
+            $string = str_replace($domain,"",$string);
+        }
+
 		$buster     = !empty($this->buster) ? '&#038;ver=' . $this->buster : '';
 		$debug_flag = 'yes' == $this->options['enable_debug']
 			? '&#038;debug' : '';
